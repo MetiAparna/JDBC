@@ -1,0 +1,25 @@
+public class testDelete 
+{
+	public static void main(String[] args) throws ClassNotFoundException, IOException
+	{
+		Driver d;
+		try {
+			d=new Driver();
+			DriverManager.registerDriver(d);
+			FileInputStream f=new FileInputStream("mydbinfo.properties");
+			Properties pro=new Properties();
+			pro.load(f);
+			String url="jdbc:mysql://localhost:3306/jdbc_intro";
+			Connection c=DriverManager.getConnection(url,pro);
+			java.sql.Statement s=c.createStatement();
+			String query="DELETE FROM STUDENT WHERE sname='mukundha'";
+			int res=s.executeUpdate(query);
+			System.out.println("no of rows deleted"+res);
+			c.close();
+		}catch(SQLException  e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
